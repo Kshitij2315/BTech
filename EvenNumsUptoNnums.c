@@ -10,7 +10,7 @@ int main()
    int i=0;
    int N=0;
    
-   printf("Till: ");
+   printf("Upto: ");
    scanf("%d",&N);
    
    printf("The Even Numbers are:");
