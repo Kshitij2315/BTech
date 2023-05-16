@@ -23,16 +23,29 @@ int main()
              scanf("%d",&arr[i][j]);
         }
      }
+     for(i=0; i<N; i++)
+     {
+         for(j=0; j<M; j++)
+         {
+             printf("\narr[%d][%d] = %d ",i,j,arr[i][j]);
+         }
+         
+     }
+     
+     printf("\n");
      
      for(i=0; i<N; i++)
      {
          for(j=0; j<M; j++)
          {
-             printf("\narr[%d][%d] = %d",i,j,arr[i][j]);
+             printf("%d ",arr[i][j]);
          }
+         
+         printf("\n");
      }
    
     return 0;
 }
+
 
 
