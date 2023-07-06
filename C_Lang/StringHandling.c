@@ -8,17 +8,65 @@
 
 //WAF to Return Upper Case String
 
+//WAF to Return a Copy of String
+
+//WAF to Return Concatenation of Two Strings
+
 *******************************************************************************/
 #include <stdio.h>
+
+char* ConcatenationStr(char *str1, char *str2)
+{
+    char result[100];
+    int i,j,length;
+    
+    for(i=0; str1[i]!='\0'; i++)
+    {
+        result[i] = str1[i];
+    }
+    
+    result[i] = 32;
+    
+    i = i + 1;
+    
+    /*for(j=0; str2[j]!='\0'; j++)
+    {
+        result[i + j] = str2[j];
+    }*/
+    
+    for(j=0; str2[j]!='\0'; j++, i++)
+    {
+        result[i] = str2[j];
+    }
+    
+    result[i + j] = '\0';
+    
+    return result;
+}
+
+char* copyStr(char* str)
+{
+    char copied[100];
+    int i;
+    
+    for(i=0;*(str+i)!='\0';i++)
+    {
+        copied[i]=str[i];
+    }
+    
+    copied[i]='\0';
+    
+    return copied;
+}
 
 char* conCase(char *str)
 {
     int i;
     char result[100];
     
-    for(i=0;str[i]!='\0';i++)
+    for(i=0;str[i]!='\0';i++) //*(str+i)!='\0';
     {
-        if(*str[i]>=97 && *str[i]<=122)
+        if(str[i]>=97 && str[i]<=122)//*(str+i)>=97 && *(str+i)<=122;
         {
             result[i] = str[i] - 32;
         }
@@ -68,15 +116,29 @@ int searchChar(char* str, char ch)
 
 int main() 
 {
-    char str[100], ch, result;
+    char str[100], ch, *result, *copied, str1[100], str2[100];
     int ans;
 
-    printf("\n\n Enter a string: ");
-    gets(str);
+    printf("Enter First String: ");
+    gets(str1);
     
-    result=conCase(str);
+    printf("Enter Second String: ");
+    gets(str2);
+
+    result = ConcatenationStr(str1, str2); 
     
-    printf("%s",result);
+    printf("Concatenation: %s",result);
+
+    //printf("\n\n Enter a string: ");
+    //gets(str);
+    
+   /*** copied = copyStr(str);
+    
+    printf("Copied String: %s", copied);***/
+    
+    /**result=conCase(str);
+    
+    printf("%s",result)**/
     
     /*****printf(" Enter a character to search: ");
     scanf(" %c", &ch);
@@ -90,7 +152,7 @@ int main()
      else 
      {
          printf("\n\nCharacter '%c' not found in the string.\n", ch);
-     }*********************/
+     }*****/
 
    /* printRev(str);
 
