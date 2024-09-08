@@ -1,9 +1,6 @@
 /******************************************************************************
 
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
+To display, insert, search and delete an element from an array.
 
 *******************************************************************************/
 #include <stdio.h>
@@ -97,6 +94,23 @@ int insertAfter(int n, int arr[])
     return n + 1;
 }
 
+int delete(int n, int arr[])
+{
+    int i, j, e;
+    
+    printf("\nInput element to delete: ");
+    scanf("%d",&e);
+    
+    i = search(n, arr, e);
+    
+    for(; i < n; i++)
+    {
+        arr[i] = arr[i+1];
+    }
+    
+    return n-1;
+}
+
 int main()
 {
     int n, i, arr[100];
@@ -107,21 +121,16 @@ int main()
     input(n, arr);
     display(n, arr);
     
-    /*printf("\n_______________");
-    
-    search(n, arr);*/
-    
-   
-    /*printf("\n_______________");
-   
-    n = insertPosition(n, arr);*/
-    
-   
     printf("\n_______________");
     
-    n = insertAfter(n, arr);
+    //search(n, arr);
     
-   
+    //n = insertPosition(n, arr);*/
+    
+    //n = insertAfter(n, arr);
+    
+    n = delete(n, arr);
+    
     display(n , arr);
    
     return 0;
