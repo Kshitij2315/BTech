@@ -90,6 +90,135 @@ void displayRev()
     }
 }
 
+void search()
+{
+    int find, found = 0;
+    struct node *temp;
+    
+    printf("Enter Element to search for: ");
+    scanf("%d",&find);
+    
+    temp = start;
+     
+    while(temp != NULL)
+    {
+        if( temp -> data == find)
+        {
+            found = 1;
+            break;
+        }
+        else
+        {
+            temp =temp -> next;
+        }
+    }
+    
+    if( found == 1)
+    {
+        printf("\nThe element %d is found in the given Linked List.",find);
+    }
+    else
+    {
+        printf("\nThe element %d is not found in the given Linked List. ",find);
+    }
+}
+
+void insertAfter()
+{
+    int after, data;
+    struct node *temp, *prev, *newnode;
+    
+    printf("Enter element to insert after: ");
+    scanf("%d",&after);
+    
+    prev = NULL;
+    temp = start;
+    
+    while(temp != NULL)
+    {
+        if(temp -> data == after)
+        {
+            prev = temp;
+            temp = temp -> next;
+            
+            break; 
+        }
+        else
+        {
+            prev = temp;
+            temp = temp -> next;
+        }
+    }
+    
+    
+    newnode = createNode();
+    
+    printf("\nEnter data to insert after %d: ",after);
+    scanf("%d",&data);
+    
+    newnode -> data = data;
+    
+    if(temp == NULL)
+    {
+        prev -> next = newnode;
+        newnode -> prev = prev;
+    }
+    else
+    {
+        newnode -> prev = prev;
+        prev -> next = newnode;
+        
+        newnode -> next = temp;
+        temp -> prev = newnode; 
+    }
+}
+
+void insertBefore()
+{
+    int before, data;
+    struct node *temp, *prev, *newnode;
+    
+    printf("\nEnter element to insert before: ");
+    scanf("%d",&before);
+    
+    prev = NULL;
+    temp = start;
+    
+    while(temp != NULL)
+    {
+        if(temp -> data == before)
+        {
+            break;
+        }
+        else
+        {
+            temp = temp -> next;
+        }
+        
+    }
+    
+    newnode = createNode();
+    
+    printf("\nEnter data to insert before %d: ",before);
+    scanf("%d",&data);
+    
+    newnode -> data = data;
+    
+    if(prev == NULL)
+    {
+        newnode -> next = temp;
+        temp -> prev = newnode;
+    }
+    else
+    {
+        newnode -> next = temp;
+        temp -> prev = newnode;
+    
+        newnode -> prev = prev;
+        prev -> next = newnode;  
+    }
+}
+
 int main()
 {
     int ans=1;
@@ -111,15 +240,15 @@ int main()
         {
         case 1: createList(); 
                 break;
-        //case 2: search(); 
-                //break;
+        case 2: search(); 
+                break;
         case 3: display(); 
                 break;
-        /*case 4: insertAfter(); 
+        case 4: insertAfter(); 
                 break; 
         case 5: insertBefore(); 
                 break;
-        case 6: delete(); 
+        /*case 6: delete(); 
                 break;*/
         case 7: displayRev();
                 break;
@@ -129,3 +258,4 @@ int main()
 
     return 0;
 }
+
