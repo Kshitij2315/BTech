@@ -176,48 +176,89 @@ void insertAfter()
 void insertBefore()
 {
     int before, data;
-    struct node *temp, *prev, *newnode;
-    
+    struct node *temp, *newnode, *prev;
+
     printf("\nEnter element to insert before: ");
-    scanf("%d",&before);
-    
-    prev = NULL;
+    scanf("%d", &before);
+
     temp = start;
-    
-    while(temp != NULL)
+
+    while (temp != NULL) 
     {
-        if(temp -> data == before)
+        if (temp -> data == before) 
         {
             break;
         }
-        else
-        {
-            temp = temp -> next;
-        }
         
+        prev = temp;
+        temp = temp -> next;
     }
-    
+
     newnode = createNode();
-    
-    printf("\nEnter data to insert before %d: ",before);
-    scanf("%d",&data);
-    
+
+    printf("\nEnter data to insert before %d: ", before);
+    scanf("%d", &data);
+
     newnode -> data = data;
-    
-    if(prev == NULL)
+
+    if (temp == start) 
+    {
+        newnode->next = temp;
+        temp->prev = newnode;
+        
+        newnode->prev = NULL;
+        
+        start = newnode; 
+    } 
+    else 
     {
         newnode -> next = temp;
+        newnode -> prev = prev;
+        
+        prev->next = newnode;
         temp -> prev = newnode;
+    }
+}
+
+void delete()
+{
+    int value;
+    struct node *temp, *prev, *agla;
+
+    printf("Enter value to delete: ");
+    scanf("%d", &value);
+
+    prev = NULL;
+    temp = start;
+    agla = temp -> next;
+
+    while (temp != NULL) 
+    {
+        if (temp -> data == value) 
+        {
+            break;
+        }
+        
+        prev = temp;
+        temp = agla;
+        agla = agla -> next;
+    }
+    
+    if(temp == start)
+    {
+        agla -> prev = NULL;
+    }
+    else if(temp -> next == NULL)
+    {
+        prev -> next = NULL;
     }
     else
     {
-        newnode -> next = temp;
-        temp -> prev = newnode;
-    
-        newnode -> prev = prev;
-        prev -> next = newnode;  
+        prev -> next = agla;
+        agla -> prev = prev; 
     }
-}
+}    
+
 
 int main()
 {
@@ -248,8 +289,8 @@ int main()
                 break; 
         case 5: insertBefore(); 
                 break;
-        /*case 6: delete(); 
-                break;*/
+        case 6: delete(); 
+                break;
         case 7: displayRev();
                 break;
         }
