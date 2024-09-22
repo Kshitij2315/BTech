@@ -246,7 +246,12 @@ void delete()
     
     if(temp == start)
     {
-        agla -> prev = NULL;
+        if(agla != NULL)
+        {
+            agla -> prev = NULL;
+        }
+        
+        start = agla;
     }
     else if(temp -> next == NULL)
     {
