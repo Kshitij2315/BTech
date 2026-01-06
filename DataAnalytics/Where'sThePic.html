@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where's the Image</title>
+  <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map { height: 300px; margin-top: 20px; }
+    body { font-family: sans-serif; padding: 20px; }
+    img { max-width: 100%; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Where's the Image</h1>
+  <input type="file" id="imageInput" accept="image/*" />
+  <div id="imagePreview"></div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const mapContainer = document.getElementById('map');
+    let map;
+
+    function convertToDecimal(degree, minute, second, ref) {
+      let decimal = degree + minute / 60 + second / 3600;
+      return (ref === 'S' || ref === 'W') ? -decimal : decimal;
+    }
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+
+      // Show preview
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      imagePreview.innerHTML = '';
+      imagePreview.appendChild(img);
+
+      // Read EXIF
+      EXIF.getData(file, function () {
+        const lat = EXIF.getTag(this, 'GPSLatitude');
+        const lon = EXIF.getTag(this, 'GPSLongitude');
+        const latRef = EXIF.getTag(this, 'GPSLatitudeRef');
+        const lonRef = EXIF.getTag(this, 'GPSLongitudeRef');
+
+        if (lat && lon && latRef && lonRef) {
+          const latitude = convertToDecimal(lat[0], lat[1], lat[2], latRef);
+          const longitude = convertToDecimal(lon[0], lon[1], lon[2], lonRef);
+          
+          if (!map) {
+            map = L.map('map').setView([latitude, longitude], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+          } else {
+            map.setView([latitude, longitude], 13);
+          }
+          L.marker([latitude, longitude]).addTo(map)
+            .bindPopup('This photo was taken here!')
+            .openPopup();
+        } else {
+          alert('No GPS data found in image.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
