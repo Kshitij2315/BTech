@@ -1,4 +1,4 @@
-# List.py by Kshitij
+# List.py by Kshitij Bhardwaj
 mylist = [5, "Ks", 4]
 
 print(type(mylist))
