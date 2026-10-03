@@ -20,7 +20,7 @@ print(l1.count(6))
 
 print(l1.index(6))
 
-#l1.sort()
+#   l1.sort()
 print("L1: ",l1)
 
 #l1.reverse()

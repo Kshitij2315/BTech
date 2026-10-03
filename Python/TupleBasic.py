@@ -94,32 +94,44 @@ print("t:",t,type(t))
 print()
 
 tpl = tuple('Kshitij')
-print("tuple('Kshitij'):",tpl,type(tpl))
+print("tuple('Kshitij'):",tpl,type(tpl))      # Conversion
 
 print()
+
+# s1 = "Asha"
+# s2 = s1
+# print("s1:",s1,id(s1))
+# print("s2:",s2,id(s2))
+# s1 = s1 + "Pravesh"
+# print("s1:",s1,id(s1))
+# print("s2:",s2,id(s2))
 
 t1 = (10,20,30)
 t2 = t1                          # Alias (Shallow Copy)
 print("Alias/Shallow-Copy:")
-print("t1:",t1,type(t1))
-print("t2:",t2,type(t2))
+print("Initially:")
+print("t1:",t1,type(t1),"id:",id(t1))
+print("t2:",t2,type(t2),"id:",id(t2))
 # t1[1] = 200                    # Tuple is immutable
 # print("t1:",t1,'    t2:',t2)
 t1 = t1 + (50,)                  # Adding new element to verify Alias(Shallow Copy)
-print("t1:",t1,type(t1))
-print("t2:",t2,type(t2))         # Need to Ask Doubt
+print("After - : t1 = t1 + (50,):")
+print("t1:",t1,type(t1),"id:",id(t1))
+print("t2:",t2,type(t2),"id:",id(t2))
 
 print()
 
 t1 = (10,20,30)
 t3 = copy.deepcopy(t1)            # Clone (Deep Copy)
-print("Cloning/Deep-Copy:")
-print("t1:",t1,type(t1))
-print("t3:",t3,type(t3))
+print("Cloning/Deep-Copy:")       # Behaves the same as Alias due to immutability
+print("Initially:")
+print("t1:",t1,type(t1),"id:",id(t1))
+print("t3:",t3,type(t3),"id:",id(t3))
 t2 = (40,)
 t3 = t3 + t2                      # Adding new element to verify cloning(Deep Copy)
-print("t1:",t1,type(t1))
-print("t3:",t3,type(t3))
+print("After - t3 = t3 + t2:")
+print("t1:",t1,type(t1),id(t1))
+print("t3:",t3,type(t3),id(t3))
 
 print()
 
@@ -129,14 +141,59 @@ print("z not in tpl:",'z' not in tpl)
 
 print()
 
-t1 = (10,20,30)
-t2 = t1
+t1 = (50,30,40)
+t2 = (10,20,30)            # It is same as t2 = t1
 #t2 = t1 + (40,)
-print("t2 is t1:",t2 is t1)
-print("t1 is t2:",t1 is t2)
+print("t2 is t1:",t2 is t1,"id:",id(t2))
+print("t1 is t2:",t1 is t2,"id:",id(t1))
 
 print()
 
 emppty = ()
-print("not empty: ",bool(None))      #Emptiness
+print("not empty: ",bool(emppty))      #Emptiness
 print()
+
+t1 = (50,30,40,30)
+
+print("len(t1):",len(t1))
+# print("max(t1):",max(t1))
+# print("min(t1):",min(t1))
+# print("sum(t1):",sum(t1))
+print('any(t1):',any(emppty))          # Any one value is true??
+print('all(t1):',all(emppty))          # All values are true??  Since Python never finds a False value, the condition "all elements are True" is considered satisfied.
+print("sorted(t1):",sorted(t1))        # Returns the output as list
+print("reversed(t1):",reversed(t1))    # Returns the address of the object which is an iterable object
+r = reversed(t1)
+
+for i in r:
+    print(i,end=" ")
+print()
+
+print("t1.count(30):",t1.count(30))
+print("t1.index(30):",t1.index(30))
+
+rec = ((12,'Ramesh',75.50,85.50,75.50),(10,'Ram',75.50,65.50,69.50),(11,'Ramu',65.50,85.50,75.50))
+print(tuple(sorted(rec)))
+print(sorted(rec))
+print(reversed(sorted(rec)))
+print(sorted(rec, key=lambda x: (x[2],x[3])))
+
+# for i in reversed(sorted(rec)):
+#     print(i,end=" ")
+print()
+
+# Exploding or Unpacking a Tuple
+tpl = (10,20,30)
+x,y,z = tpl
+print(x,y,z)
+tpl2 = (1,2,3,tpl,5,6)
+print(tpl2)
+tpl2 = (1,2,3,*tpl,5,6)          # Exploding
+print(tpl2)
+
+# tpl = (1,2,3)
+# tpl.remove(3)
+# tpl.discard(4)
+# print(tpl)
+# tpl.clear()
+# print(tpl)

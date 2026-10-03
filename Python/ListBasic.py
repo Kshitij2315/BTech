@@ -3,7 +3,7 @@ from re import search
 
 num = [10, 20, 30]
 num1 = [10]*5
-names = ["Ram","Shayam","Krishna","Mohan"]
+names = ["Ram","Shyam","Krishna","Mohan"]
 mix = [ 10, 25.567, "Ram"]
 empty = []
 
@@ -24,8 +24,8 @@ while i < len(names):
     print(names[i])
     i+=1
 
-names1 = ["Ram","Shayam","Krishna","Mohan"]
-
+names1 = ["Ram","Shyam","Krishna","Mohan"]
+3
 print()
 print("Through Enumerate:")
 
@@ -65,8 +65,9 @@ print("x:", x)
 print()
 
 x1 = copy.deepcopy(s)        #Clone
-
-print("x1: ",x1)
+print("Cloning/Deep-Copy:")
+print("x1: ",x1,"id:", id(x1))
+print("s:",x,"id:", id(s))
 print()
 
 s[2] = 7
@@ -130,3 +131,7 @@ emppty = []
 print("not empty: ",bool(None))      #Emptiness
 print()
 
+lst = [1,2,3]
+print(lst)
+lst.clear()
+print(lst)
