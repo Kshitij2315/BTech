@@ -1,0 +1,2 @@
+def myinit():
+    print("myinit")
