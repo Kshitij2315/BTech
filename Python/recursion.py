@@ -161,4 +161,3 @@ n = int(input("Enter a number to find its factorial: "))
 fact = factorial(n)
 
 print(fact)
-
