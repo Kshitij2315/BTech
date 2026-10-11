@@ -1,11 +1,13 @@
 # Input Devices ---> Keyboard, Mouse, Network, Files, Databases
 # Output Devices ---> Monitor(Console/Screen), Printer, Speaker, Network, Files, Databases
-# Store ---> The process of saving(persistance) state of an object is called Serialization. Eg: Python Data to JSON Type Data
-# Deserialization ---> Eg: JSON to Python Data
+# Store ---> The process of saving(persisting) state of an object is called Serialization. Eg: Python Data to JSON (Java Script Object Notation) Type Data
+# Deserialization ---> Eg: JSON (Java Script Object Notation) to Python Data
+# CSV ---> Comma Seperated Values in a normal Text file. (otherwise we can also use '|' or ':' or '#' or any other symbol)
 # Two types to access a File:
 #               i) Sequential Access
 #               ii) Random Access
 # CRUD Operations:
+#           i) Create
 #           i) Create
 #           ii) Read
 #           iii) Update
@@ -26,6 +28,7 @@
 #                           iv) w+ ---> write + read      # wb+
 #                           v) r+ ---> read + write       # rb+
 #                           vi) a+ ---> append + read     # ab+
+# f.open... f.close, f.read/read(n)/readline... f.write/writelines
 
 def read_write_text():
     str1 = 'Hi! My name is Kshitij Bhardwaj.\n'
@@ -98,5 +101,29 @@ def my_read_ch():
         else:
             print(ch, end = '')
 
-read_write_text()
-my_read_ch()
+# read_write_text()
+# my_read_ch()
+
+def my_writeline():                             # If list of strings, we need to use writeline
+    lst = ['abc', 'def', 'ghi']                 # Use write for string.
+
+    # f = open('intro.txt', 'w+')
+    with open('intro.txt', 'w+') as f:
+        # for ch in lst:
+        f.writelines(lst)
+
+
+    f.seek(0)                            # To bring the pointer to start
+
+    for i in f:
+        print(i)
+
+    f.seek(0)
+
+    # s = f.readlines()
+    #
+    # print(s)
+
+    f.close()
+
+my_writeline()
