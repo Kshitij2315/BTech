@@ -144,7 +144,6 @@ print('Sum of digits:', add)
 
 # WAF to find the factorial of n. (Using recursion)
 
-
 def factorial(n):
     if n == 0:
         return 1
