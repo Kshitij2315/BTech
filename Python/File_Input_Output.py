@@ -126,4 +126,34 @@ def my_writeline():                             # If list of strings, we need to
 
     f.close()
 
-my_writeline()
+# my_writeline()
+
+def conversion():
+    tpl = ('Ram', 'Shayam', 'Mohan')
+    lst = [90, 80, 70]
+    dic = {'AgeRam': 25, 'AgeShayam': 24, 'AgeMohan': 25}
+    st = {'107', '110', '115'}
+
+    with open('Intro.txt', 'w+') as f:
+        f.write(str(tpl))           # f.writelines(tpl)
+        f.write('\n')
+        f.write(str(lst))
+        f.write('\n')
+        f.write(str(dic))          # f.writelines(dic)
+        f.write('\n')
+        f.write(str(st))            # f.writelines(st)
+
+        f.seek(0)
+
+        tpl1 = eval(f.readline())        # readline always return strings
+        lst1 = eval(f.readline())
+        dict1 = eval(f.readline())
+        st1 = eval(f.readline())
+
+        print(tpl1)
+        print(lst1)
+        print(dict1)
+        print(st1)
+        print(type(tpl1), type(lst1), type(dict1), type(st1))
+conversion()
+
